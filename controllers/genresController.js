@@ -52,10 +52,53 @@ const createGenre = async (req, res) => {
 };
 
 // PUT http:://locahost:5000/api/genres/7  {....}
-const updateGenre = async (req, res) => {};
+const updateGenre = async (req, res) => {
+  try {
+    // cechck if the genre with the provided id exists
+
+    const id = req.params.id;
+
+    const genre = await Genre.findById(id);
+
+    if (!genre) {
+      res.status(404).send("Genre was not found");
+      return;
+    }
+
+    genre.name = req.body.name;
+    const result = await genre.save();
+    res.send(result);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
 
 // DELETE http:://locahost:5000/api/genres/5
-const deleteGenre = async (req, res) => {};
+const deleteGenre = async (req, res) => {
+  try {
+    // verify if genre with the provided ID exists
+    // cechck if the genre with the provided id exists
+
+    const id = req.params.id;
+
+    const genre = await Genre.findById(id);
+
+    console.log(genre);
+
+    if (!genre) {
+      res.status(404).send("Genre was not found");
+      return;
+    }
+
+    // delete genre
+
+    const result = await Genre.findByIdAndDelete(id);
+
+    res.status(200).send(result);
+  } catch (error) {
+    res.send(error.message);
+  }
+};
 
 module.exports = {
   getGenres,
