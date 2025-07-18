@@ -9,5 +9,7 @@ const {
 } = require("../controllers/genresController");
 
 router.get("/", getGenres);
+router.get("/:id" , getGenre)
+router.post('/', createGenre)
 
-module.exports = roapi;
+module.exports = router;

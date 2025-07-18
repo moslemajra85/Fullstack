@@ -7,11 +7,11 @@ const connectDb = require("./config/index");
 const genresRoutes = require("./routes/genresRoutes");
 
 const app = express();
+
+app.use(express.json());
 connectDb();
 
 app.use("/api/genres", genresRoutes);
-
-
 
 const port = process.env.PORT || 3000;
 
